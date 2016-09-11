@@ -22,6 +22,10 @@ module.exports = ->
 		admin_only: false
 		fn: (event, input_data, output_data) ~>
 
+			unless input_data.args
+				this.send 'notice', event.person.nick, '''I can't search for nothing, silly!'''
+				return
+
 			opts = this.bot-options.plugin-options['irc-support-bot-search']
 			query = input_data.args + ' -site:w3schools.com -site:tizag.com'
 
